@@ -31,11 +31,12 @@ def hello_world():  # put application's code here
 
             result = cursor.fetchall()
             print(result)
+            data = [dict(row) for row in result]
 
             connection.commit()
     finally:
         connection.close()
-    return render_template("index.html", data=result)
+    return render_template("index.html", data=data)
 
 
 @app.route('/items', methods=['GET', 'POST'])
