@@ -14,9 +14,8 @@ app = Flask(__name__)
 app.config['DATABASE_URL'] = os.environ['DATABASE_URL']
 
 
-@app.route('/',methods=['GET', 'POST'])
+@app.route('/',methods=['GET'])
 def hello_world():  # put application's code here
-    data = request.json
 
     connection = psycopg2.connect(app.config["DATABASE_URL"])
     dict_cur = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
