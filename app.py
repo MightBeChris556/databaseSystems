@@ -54,11 +54,13 @@ def show_items():  # put application's code here
 
             result = cursor.fetchall()
             print(result)
+            data = [dict(row) for row in result]
+
 
             connection.commit()
     finally:
         connection.close()
-    return render_template("items.html", data=jsonify(result))
+    return render_template("items.html", data=data)
 
 @app.route('/bids', methods=['GET', 'POST'])
 def show_bids():  # put application's code here
