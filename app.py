@@ -31,6 +31,7 @@ def hello_world():  # put application's code here
 
             result = cursor.fetchall()
             print(result)
+            print(jsonify(result))
 
             connection.commit()
     finally:
