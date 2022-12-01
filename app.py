@@ -39,9 +39,8 @@ def hello_world():  # put application's code here
     return render_template("index.html", data=data)
 
 
-@app.route('/items', methods=['GET', 'POST'])
+@app.route('/items', methods=['GET'])
 def show_items():  # put application's code here
-    data = request.json
 
     connection = psycopg2.connect(app.config["DATABASE_URL"])
     dict_cur = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -50,7 +49,7 @@ def show_items():  # put application's code here
             sql = '''SELECT * FROM item
                       '''
 
-            cursor.execute(sql, )
+            cursor.execute(sql)
 
             result = cursor.fetchall()
             print(result)
@@ -62,9 +61,8 @@ def show_items():  # put application's code here
         connection.close()
     return render_template("items.html", data=data)
 
-@app.route('/bids', methods=['GET', 'POST'])
+@app.route('/bids', methods=['GET'])
 def show_bids():  # put application's code here
-    data = request.json
 
     connection = psycopg2.connect(app.config["DATABASE_URL"])
     dict_cur = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -77,11 +75,13 @@ def show_bids():  # put application's code here
 
             result = cursor.fetchall()
             print(result)
+            data = [dict(row) for row in result]
+
 
             connection.commit()
     finally:
         connection.close()
-    return render_template("bids.html", data=jsonify(result))
+    return render_template("bids.html", data=data)
 
 
 if __name__ == '__main__':
