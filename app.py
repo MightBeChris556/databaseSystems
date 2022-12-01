@@ -30,13 +30,12 @@ def hello_world():  # put application's code here
 
 
             result = cursor.fetchall()
-            print(jsonify(result))
-            print(json.dumps(jsonify((result))))
+            print(result)
 
             connection.commit()
     finally:
         connection.close()
-    return render_template("index.html", data=jsonify(result))
+    return render_template("index.html", data=result)
 
 
 @app.route('/items', methods=['GET', 'POST'])
