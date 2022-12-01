@@ -23,11 +23,12 @@
   </thead>
   <tbody>
     <tr>
-
+        {% for buyer in result %}
       <th scope="row">1</th>
-        <td>{{ stock.noComments }}</td>
+        <td>{{ result.buyer_id }}</td>
       <td>Otto</td>
       <td>@mdo</td>
+                                                {% endfor %}
     </tr>
     <tr>
       <th scope="row">2</th>
