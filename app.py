@@ -27,7 +27,7 @@ def hello_world():  # put application's code here
 
 
 
-            cursor.execute(sql,)
+            cursor.execute(sql)
 
 
             result = cursor.fetchall()
